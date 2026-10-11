@@ -1,0 +1,12 @@
+{
+  "slack-task-notifier": {
+    "enabled": true,
+    "Stop": [
+      {
+        "type": "command",
+        "command": "bash ./scripts/send_slack_notification.sh",
+        "timeout": 15
+      }
+    ]
+  }
+}
