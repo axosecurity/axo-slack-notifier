@@ -169,6 +169,21 @@ Branch: `feature/auth-middleware` • Status: completed • Hook Overhead: 0 tok
 
 ---
 
+## 🧠 Autonomous Agent Skill Integration
+
+`axo-slack-notifier` is also packaged as an **Agent Skill** (`skill/SKILL.md`).
+
+### How It Works in a Monorepo
+When any developer opens an AI agent inside your monorepo, the agent automatically checks if local workspace hooks are present:
+1. If the workspace hooks are already installed: The agent proceeds with work normally.
+2. If hooks are missing: The agent runs `skill/scripts/bootstrap.sh` to install local hooks directly inside that specific project directory (leaving global machine configs untouched).
+3. The moment the agent finishes a turn or goes idle, an automatic notification is fired to your team's Slack channel.
+
+### Adding the Skill to your Monorepo
+Copy the `skill/` folder into your monorepo under `.agents/skills/axo-slack-notifier` or register it in your company's shared agent configuration.
+
+---
+
 ## 📂 Repository Structure
 
 ```
@@ -179,6 +194,10 @@ axo-slack-notifier/
 ├── install.sh                       # Multi-agent automated installer
 ├── uninstall.sh                     # Uninstallation script
 ├── test_notification.sh             # Multi-agent simulation test runner
+├── skill/                           # Self-provisioning agent skill
+│   ├── SKILL.md                     # Skill instructions & auto-bootstrap protocol
+│   └── scripts/
+│       └── bootstrap.sh             # Automated workspace inspector & setup
 ├── scripts/
 │   ├── send_slack_notification.sh   # Core multi-agent webhook dispatcher
 │   └── opencode-plugin.ts           # OpenCode TypeScript lifecycle plugin
